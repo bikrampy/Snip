@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import User from "../models/user.js";
-import { createSession, deleteSession } from "../services/auth.js";
 
 export async function handlePostUserSignUp(req, res) {
     try {
@@ -50,8 +52,16 @@ export async function handlePostUserLogin(req, res) {
         if (!isMatch) {
             return res.redirect("/user/login");
         }
-        const sessionId = createSession(user);
-        res.cookie("uid", sessionId);
+        const token = jwt.sign(
+            {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+            },
+            process.env.SECRET_KEY,
+            { expiresIn: "1h" },
+        );
+        res.cookie("token", token);
         return res.redirect("/urls");
     } catch (error) {
         console.error("Login error:", error);
@@ -69,8 +79,6 @@ export async function handleGetUserLogin(req, res) {
 }
 
 export function handleUserLogout(req, res) {
-    const sessionId = req.cookies.uid;
-    deleteSession(sessionId);
-    res.clearCookie("uid");
+    res.clearCookie("token");
     return res.redirect("/user/login");
 }

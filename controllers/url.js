@@ -10,6 +10,7 @@ export async function handleGetAllUrls(req, res) {
             .lean();
         res.render("home", {
             allURLs: allURLs,
+            user: req.user,
         });
     } catch (error) {
         console.error("Error fetching URLs:", error);
@@ -23,7 +24,10 @@ export async function handleGenerateNewShortURL(req, res) {
         if (!url) {
             return res.status(400).send("Please provide a valid URL");
         }
-        const existing = await URL.findOne({ redirectURL: url });
+        const existing = await URL.findOne({
+            redirectURL: url,
+            createdBy: req.user._id,
+        });
         if (existing) {
             return res.redirect(`/urls/url/${existing.shortId}`);
         }

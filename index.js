@@ -5,7 +5,6 @@ import ejs from "ejs";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { connectMongoDB } from "./connection.js";
-import { getUser } from "./services/auth.js";
 
 import urlRouter from "./routes/url.js";
 import userRouter from "./routes/user.js";
@@ -23,17 +22,6 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use((req, res, next) => {
-    const sessionId = req.cookies.uid;
-
-    if (sessionId) {
-        const user = getUser(sessionId);
-        req.user = user;
-        res.locals.user = user;
-    }
-
-    next();
-});
 
 app.get("/", (req, res) => {
     res.render("landing");

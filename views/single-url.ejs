@@ -4,84 +4,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Short URL</title>
-
+  <title>Link Created – Snip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
       margin: 0;
-      background: #f2f2f2;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #0f0f11;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
     .card {
-      background: #fff;
-      padding: 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 350px;
+      background: #16161e;
+      border: 1px solid #2a2a38;
+      border-radius: 16px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7c6ef5;
+    }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0d1f17;
+      border: 1px solid #1a3d28;
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #4caf82;
+      margin-bottom: 20px;
+    }
+
+    .success-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4caf82;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #5a5a78;
+      margin-bottom: 28px;
+    }
+
+    .url-block {
+      background: #1c1c24;
+      border: 1px solid #2a2a38;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .url-block-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5a5a78;
+      margin-bottom: 8px;
+    }
+
+    .short-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: #7c6ef5;
+      text-decoration: none;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .short-link:hover {
+      color: #a89cf7;
+    }
+
+    .original-url {
+      font-size: 13px;
+      color: #9898b0;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1f1f2b;
+      margin: 20px 0;
+    }
+
+    .back-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: 1px solid #2a2a38;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #9898b0;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
       text-align: center;
     }
 
-    .card h1 {
-      margin-bottom: 16px;
-      font-size: 22px;
-    }
-
-    .card p {
-      font-size: 14px;
-      margin-bottom: 12px;
-      word-break: break-all;
-    }
-
-    .card a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    .card a:hover {
-      text-decoration: underline;
-    }
-
-    .card button {
-      margin-top: 16px;
-      padding: 10px;
-      width: 100%;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .card button:hover {
-      background: #0056d6;
+    .back-btn:hover {
+      background: #1c1c24;
+      color: #e8e8f0;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <h1>Short URL Created 🎉</h1>
 
-    <p>
-      <strong>Short URL:</strong><br>
-      <a href="/urls/u/<%= url.shortId %>">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Snip</span>
+    </div>
+
+    <div class="success-badge">
+      <div class="success-dot"></div>
+      Link created
+    </div>
+
+    <h1>Your link is ready</h1>
+    <p class="subtitle">Share your short URL anywhere.</p>
+
+    <div class="url-block">
+      <p class="url-block-label">Short URL</p>
+      <a href="/urls/u/<%= url.shortId %>" class="short-link">
         http://localhost:8001/urls/u/<%= url.shortId %>
       </a>
-    </p>
+    </div>
 
-    <p>
-      <strong>Original URL:</strong><br>
-      <%= url.redirectURL %>
-    </p>
+    <div class="url-block">
+      <p class="url-block-label">Original URL</p>
+      <span class="original-url"><%= url.redirectURL %></span>
+    </div>
 
-    <a href="/urls">
-      <button>Go Back</button>
-    </a>
+    <div class="divider"></div>
+
+    <a href="/urls" class="back-btn">Back to dashboard</a>
+
   </div>
 </body>
 

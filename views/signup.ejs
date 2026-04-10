@@ -4,95 +4,181 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup</title>
+  <title>Signup – Snip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: #f2f2f2;
-    }
-
-    .signup-card {
-      background: #fff;
-      padding: 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 320px;
-    }
-
-    .signup-card h1 {
-      margin: 0 0 20px;
-      font-size: 24px;
-      text-align: center;
-    }
-
-    .signup-card label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 14px;
-    }
-
-    .signup-card input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .signup-card button {
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #0f0f11;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #16161e;
+      border: 1px solid #2a2a38;
+      border-radius: 16px;
+      padding: 36px 32px;
       width: 100%;
-      padding: 10px;
-      background: #007bff;
+      max-width: 380px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7c6ef5;
+    }
+
+    .brand-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #5a5a78;
+      margin-bottom: 28px;
+    }
+
+    .error-box {
+      background: #1f1218;
+      border: 1px solid #3d1a24;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #f08090;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #9898b0;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      background: #1c1c24;
+      border: 1px solid #2a2a38;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #e8e8f0;
+      font-family: 'Inter', Arial, sans-serif;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 18px;
+    }
+
+    input::placeholder {
+      color: #3a3a50;
+    }
+
+    input:focus {
+      border-color: #7c6ef5;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #7c6ef5;
       color: #fff;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .signup-card button:hover {
-      background: #0056d6;
-    }
-
-    .signup-card p {
-      text-align: center;
+      border-radius: 10px;
+      padding: 13px;
       font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', Arial, sans-serif;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 4px;
+    }
+
+    button[type="submit"]:hover {
+      background: #6a5de0;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 13px;
+      color: #5a5a78;
+      margin-top: 20px;
+    }
+
+    .footer-note a {
+      color: #7c6ef5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-note a:hover {
+      color: #a89cf7;
     }
   </style>
 </head>
 
 <body>
-  <div class="signup-card">
-    <h1>Signup</h1>
+  <div class="card">
 
-    <!-- Optional error message -->
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Snip</span>
+    </div>
+
+    <h1>Create an account</h1>
+    <p class="subtitle">Start shortening your links for free.</p>
+
     <% if (error) { %>
-    <p style="color:red;"><%= error %></p>
+    <div class="error-box"><%= error %></div>
     <% } %>
 
     <form action="/user/signup" method="POST">
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name" required autocomplete="name">
+      <input type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
 
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Create a password" required autocomplete="new-password">
+      <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
 
-      <button type="submit">Signup</button>
+      <button type="submit">Create account</button>
     </form>
 
-    <p>
-      Already have an account?
-      <a href="/user/login">Login</a>
+    <p class="footer-note">
+      Already have an account? <a href="/user/login">Sign in</a>
     </p>
+
   </div>
 </body>
 

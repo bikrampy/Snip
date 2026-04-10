@@ -4,69 +4,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URL Shortener</title>
-
+  <title>Snip – URL Shortener</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
       margin: 0;
-      background: #f2f2f2;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #0f0f11;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
     .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background: #16161e;
+      border: 1px solid #2a2a38;
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
       text-align: center;
-      width: 350px;
     }
 
-    .card h1 {
-      margin-bottom: 10px;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .card p {
-      margin-bottom: 20px;
-      color: #555;
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #7c6ef5;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.4px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #5a5a78;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1f1f2b;
+      margin-bottom: 24px;
     }
 
     .btn {
       display: block;
       width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', Arial, sans-serif;
       text-decoration: none;
-      border-radius: 5px;
-      background: #007bff;
-      color: white;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 10px;
     }
 
-    .btn:hover {
-      background: #0056d6;
+    .btn-primary {
+      background: #7c6ef5;
+      color: #fff;
+      border: none;
     }
 
-    .secondary {
-      background: #6c757d;
+    .btn-primary:hover {
+      background: #6a5de0;
     }
 
-    .secondary:hover {
-      background: #545b62;
+    .btn-secondary {
+      background: transparent;
+      color: #9898b0;
+      border: 1px solid #2a2a38;
+    }
+
+    .btn-secondary:hover {
+      background: #1c1c24;
+      color: #e8e8f0;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #3a3a50;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <h1>URL Shortener 🔗</h1>
-    <p>Shorten your long URLs quickly and easily.</p>
 
-    <a href="/user/login" class="btn">Login</a>
-    <a href="/user/signup" class="btn secondary">Signup</a>
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Snip</span>
+    </div>
+
+    <p class="tagline">Shorten your long URLs quickly and easily.</p>
+
+    <div class="divider"></div>
+
+    <a href="/user/login" class="btn btn-primary">Login</a>
+    <a href="/user/signup" class="btn btn-secondary">Create an account</a>
+
+    <p class="footer-note">Free to use. No credit card required.</p>
+
   </div>
 </body>
 
