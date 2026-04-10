@@ -1,0 +1,23 @@
+{
+    "name": "09-url-shortener",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "Bikram Saha",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "dependencies": {
+        "bcrypt": "^6.0.0",
+        "cookie-parser": "^1.4.7",
+        "dotenv": "^17.4.1",
+        "ejs": "^5.0.1",
+        "express": "^5.2.1",
+        "mongoose": "^9.4.1",
+        "nanoid": "^5.1.7",
+        "nodemon": "^3.1.14",
+        "uuid": "^13.0.0"
+    }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f2f2f2;
+    }
+
+    .signup-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 320px;
+    }
+
+    .signup-card h1 {
+      margin: 0 0 20px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .signup-card label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .signup-card input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .signup-card button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .signup-card button:hover {
+      background: #0056d6;
+    }
+
+    .signup-card p {
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-card">
+    <h1>Signup</h1>
+
+    <!-- Optional error message -->
+    <% if (error) { %>
+    <p style="color:red;"><%= error %></p>
+    <% } %>
+
+    <form action="/user/signup" method="POST">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required autocomplete="name">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Create a password" required autocomplete="new-password">
+
+      <button type="submit">Signup</button>
+    </form>
+
+    <p>
+      Already have an account?
+      <a href="/user/login">Login</a>
+    </p>
+  </div>
+</body>
+
+</html>
