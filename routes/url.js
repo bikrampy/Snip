@@ -12,6 +12,6 @@ const urlRouter = express.Router();
 urlRouter.get("/", checkAuth, handleGetAllUrls);
 urlRouter.post("/", checkAuth, handleGenerateNewShortURL);
 urlRouter.get("/u/:id", handleRedirectToOriginalURL);
-urlRouter.get("/url/:id", handleGetSingleURL);
+urlRouter.get("/url/:id", checkAuth, handleGetSingleURL);
 
 export default urlRouter;

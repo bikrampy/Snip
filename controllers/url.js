@@ -46,7 +46,10 @@ export async function handleGenerateNewShortURL(req, res) {
 
 export async function handleGetSingleURL(req, res) {
     try {
-        const entry = await URL.findOne({ shortId: req.params.id }).lean();
+        const entry = await URL.findOne({
+            shortId: req.params.id,
+            createdBy: req.user._id,
+        }).lean();
         if (!entry) {
             return res.status(404).send("Short URL not found");
         }

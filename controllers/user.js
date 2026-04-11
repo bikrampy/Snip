@@ -21,7 +21,7 @@ export async function handlePostUserSignUp(req, res) {
             email: cleanEmail,
             password: hashedPassword,
         });
-        return res.redirect("/urls");
+        return res.redirect("/user/login");
     } catch (error) {
         console.error("Signup error:", error);
         return res.status(500).send("Server Error");
@@ -30,7 +30,7 @@ export async function handlePostUserSignUp(req, res) {
 
 export async function handleGetUserSignup(req, res) {
     try {
-        return res.render("signup", { error: null });
+        return res.render("signup");
     } catch (error) {
         console.error("Error loading login page:", error);
         return res.status(500).send("Server Error");
@@ -71,7 +71,7 @@ export async function handlePostUserLogin(req, res) {
 
 export async function handleGetUserLogin(req, res) {
     try {
-        return res.render("login", { error: null });
+        return res.render("login");
     } catch (error) {
         console.error("Error loading signup page:", error);
         return res.status(500).send("Server Error");
