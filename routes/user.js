@@ -10,9 +10,9 @@ import {
 
 const userRouter = express.Router();
 
-userRouter.post("/signup", handlePostUserSignUp);
 userRouter.get("/signup", handleGetUserSignup);
-userRouter.post("/login", handlePostUserLogin);
+userRouter.post("/signup", handlePostUserSignUp);
 userRouter.get("/login", handleGetUserLogin);
+userRouter.post("/login", handlePostUserLogin);
 userRouter.get("/logout", handleUserLogout);
 export default userRouter;

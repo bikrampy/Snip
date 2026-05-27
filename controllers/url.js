@@ -44,6 +44,22 @@ export async function handleGenerateNewShortURL(req, res) {
     }
 }
 
+export async function handleDeleteURL(req, res) {
+    try {
+        const { id } = req.params;
+
+        await URL.findOneAndDelete({
+            _id: id,
+            createdBy: req.user._id,
+        });
+
+        return res.redirect("/urls");
+    } catch (error) {
+        console.error("Delete error:", error);
+        return res.status(500).send("Server Error");
+    }
+}
+
 export async function handleGetSingleURL(req, res) {
     try {
         const entry = await URL.findOne({
@@ -56,22 +72,6 @@ export async function handleGetSingleURL(req, res) {
         res.render("single-url", { url: entry });
     } catch (error) {
         console.error("Error fetching URL:", error);
-        return res.status(500).send("Server Error");
-    }
-}
-
-export async function handleRedirectToOriginalURL(req, res) {
-    try {
-        const id = req.params.id;
-        const entry = await URL.findOne({
-            shortId: id,
-        }).lean();
-        if (!entry) {
-            return res.status(404).send("Short URL not found");
-        }
-        return res.redirect(entry.redirectURL);
-    } catch (error) {
-        console.error("Redirect error:", error);
         return res.status(500).send("Server Error");
     }
 }
