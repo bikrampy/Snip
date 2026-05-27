@@ -13,26 +13,17 @@ export async function handlePostUserSignUp(req, res) {
         const cleanEmail = email.toLowerCase().trim();
         const existingUser = await User.findOne({ email: cleanEmail });
         if (existingUser) {
-            return res.redirect("/user/signup");
+            return res.redirect("/signup");
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await User.create({
+        await User.create({
             name,
             email: cleanEmail,
             password: hashedPassword,
         });
-        return res.redirect("/user/login");
+        return res.redirect("/login");
     } catch (error) {
         console.error("Signup error:", error);
-        return res.status(500).send("Server Error");
-    }
-}
-
-export async function handleGetUserSignup(req, res) {
-    try {
-        return res.render("signup");
-    } catch (error) {
-        console.error("Error loading login page:", error);
         return res.status(500).send("Server Error");
     }
 }
@@ -46,11 +37,11 @@ export async function handlePostUserLogin(req, res) {
         const cleanEmail = email.toLowerCase().trim();
         const user = await User.findOne({ email: cleanEmail });
         if (!user) {
-            return res.redirect("/user/login");
+            return res.redirect("/login");
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.redirect("/user/login");
+            return res.redirect("/login");
         }
         const token = jwt.sign(
             {
@@ -61,24 +52,20 @@ export async function handlePostUserLogin(req, res) {
             process.env.SECRET_KEY,
             { expiresIn: "1h" },
         );
-        res.cookie("token", token);
-        return res.redirect("/urls");
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 3600000, // 1 hour
+        });
+        return res.redirect("/dashboard");
     } catch (error) {
         console.error("Login error:", error);
         return res.status(500).send("Server Error");
     }
 }
 
-export async function handleGetUserLogin(req, res) {
-    try {
-        return res.render("login");
-    } catch (error) {
-        console.error("Error loading signup page:", error);
-        return res.status(500).send("Server Error");
-    }
-}
-
 export function handleUserLogout(req, res) {
     res.clearCookie("token");
-    return res.redirect("/user/login");
+    return res.redirect("/login");
 }

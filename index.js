@@ -1,21 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-import ejs from "ejs";
 import path from "path";
 import cookieParser from "cookie-parser";
 
 import { connectMongoDB } from "./connection.js";
-
-import urlRouter from "./routes/url.js";
-import userRouter from "./routes/user.js";
-
-import { handleRedirectToOriginalURL } from "./controllers/public.js";
+import mainRouter from "./routes/index.js";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
-connectMongoDB(process.env.MONGO_URL).then((data) => {
+connectMongoDB(process.env.MONGO_URL).then(() => {
     console.log("MongoDB connected successfully.");
 });
 
@@ -25,24 +20,10 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.resolve("./public")));
 
-import jwt from "jsonwebtoken";
-
-app.get("/", (req, res) => {
-    const token = req.cookies.token;
-    if (token) {
-        try {
-            jwt.verify(token, process.env.SECRET_KEY);
-            return res.redirect("/urls");
-        } catch (error) {
-            return res.render("landing");
-        }
-    }
-    return res.render("landing");
-});
-app.use("/urls", urlRouter);
-app.use("/user", userRouter);
-app.get("/:shortId", handleRedirectToOriginalURL);
+// Mount the aggregator router
+app.use("/", mainRouter);
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

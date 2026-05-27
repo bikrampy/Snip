@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Link Created – Snip</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *,
     *::before,
@@ -17,55 +18,74 @@
 
     body {
       font-family: 'Inter', Arial, sans-serif;
-      background: #0f0f11;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #09090b 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: relative;
+    }
+
+    /* Ambient glow */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 110, 245, 0.15) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .card {
-      background: #16161e;
-      border: 1px solid #2a2a38;
-      border-radius: 16px;
-      padding: 36px 32px;
+      background: rgba(22, 22, 30, 0.65);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(124, 110, 245, 0.18);
+      border-radius: 24px;
+      padding: 40px 36px;
       width: 100%;
       max-width: 420px;
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+      z-index: 10;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 28px;
+      gap: 10px;
+      margin-bottom: 24px;
     }
 
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #7c6ef5;
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(124, 110, 245, 0.3));
     }
 
     .brand-name {
-      font-size: 16px;
-      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
       color: #fff;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
     }
 
     .success-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #0d1f17;
-      border: 1px solid #1a3d28;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
       border-radius: 999px;
-      padding: 5px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #4caf82;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #34d399;
       margin-bottom: 20px;
     }
 
@@ -73,86 +93,110 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #4caf82;
+      background: #34d399;
+      box-shadow: 0 0 8px #34d399;
     }
 
     h1 {
-      font-size: 22px;
-      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
       color: #fff;
-      letter-spacing: -0.4px;
-      margin-bottom: 6px;
+      letter-spacing: -0.6px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       font-size: 14px;
-      color: #5a5a78;
+      color: #94a3b8;
       margin-bottom: 28px;
     }
 
     .url-block {
-      background: #1c1c24;
-      border: 1px solid #2a2a38;
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-bottom: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 16px;
+      position: relative;
     }
 
     .url-block-label {
+      font-family: 'Outfit', sans-serif;
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #5a5a78;
+      color: #64748b;
       margin-bottom: 8px;
     }
 
     .short-link {
-      font-size: 14px;
-      font-weight: 500;
-      color: #7c6ef5;
+      font-size: 15px;
+      font-weight: 600;
+      color: #818cf8;
       text-decoration: none;
       word-break: break-all;
       line-height: 1.5;
+      display: block;
     }
 
     .short-link:hover {
-      color: #a89cf7;
+      color: #c7d2fe;
     }
 
     .original-url {
-      font-size: 13px;
-      color: #9898b0;
+      font-size: 13.5px;
+      color: #cbd5e1;
       word-break: break-all;
       line-height: 1.5;
+      display: block;
     }
 
     .divider {
       height: 1px;
-      background: #1f1f2b;
-      margin: 20px 0;
+      background: linear-gradient(90deg, transparent, rgba(124, 110, 245, 0.2), transparent);
+      margin: 24px 0;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 14.5px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #7c6ef5 0%, #6366f1 100%);
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 14px rgba(124, 110, 245, 0.25);
+      margin-bottom: 12px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124, 110, 245, 0.45);
+      background: linear-gradient(135deg, #8a7df6 0%, #4f46e5 100%);
     }
 
     .back-btn {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: 1px solid #2a2a38;
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: 'Inter', Arial, sans-serif;
-      color: #9898b0;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-      text-decoration: none;
-      text-align: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
     }
 
     .back-btn:hover {
-      background: #1c1c24;
-      color: #e8e8f0;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(124, 110, 245, 0.35);
+      color: #fff;
     }
   </style>
 </head>
@@ -161,21 +205,21 @@
   <div class="card">
 
     <div class="brand">
-      <div class="brand-dot"></div>
+      <img src="/favicon.png" alt="Snip Logo" class="brand-logo">
       <span class="brand-name">Snip</span>
     </div>
 
     <div class="success-badge">
       <div class="success-dot"></div>
-      Link created
+      Short link created
     </div>
 
-    <h1>Your link is ready</h1>
-    <p class="subtitle">Share your short URL anywhere.</p>
+    <h1>Your link is ready!</h1>
+    <p class="subtitle">You can now share this short URL anywhere.</p>
 
     <div class="url-block">
       <p class="url-block-label">Short URL</p>
-      <a href="/<%= url.shortId %>" class="short-link">
+      <a href="/<%= url.shortId %>" class="short-link" id="shortLink" target="_blank">
         https://snip.beingbifrons.shop/<%= url.shortId %>
       </a>
     </div>
@@ -187,9 +231,30 @@
 
     <div class="divider"></div>
 
-    <a href="/urls" class="back-btn">Back to dashboard</a>
+    <button onclick="copyLink()" id="copyBtn" class="btn btn-primary">Copy Short Link</button>
+    <a href="/dashboard" class="back-btn btn">Back to dashboard</a>
 
   </div>
+
+  <script>
+    function copyLink() {
+      const linkText = document.getElementById("shortLink").innerText.trim();
+      navigator.clipboard.writeText(linkText).then(() => {
+        const copyBtn = document.getElementById("copyBtn");
+        copyBtn.innerText = "Copied!";
+        copyBtn.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+        copyBtn.style.boxShadow = "0 4px 14px rgba(16, 185, 129, 0.25)";
+        
+        setTimeout(() => {
+          copyBtn.innerText = "Copy Short Link";
+          copyBtn.style.background = "";
+          copyBtn.style.boxShadow = "";
+        }, 2000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+    }
+  </script>
 </body>
 
 </html>

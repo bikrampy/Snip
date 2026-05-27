@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login – Snip</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *,
     *::before,
@@ -17,132 +18,159 @@
 
     body {
       font-family: 'Inter', Arial, sans-serif;
-      background: #0f0f11;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #09090b 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: relative;
+    }
+
+    /* Decorative ambient glow */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 110, 245, 0.15) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .card {
-      background: #16161e;
-      border: 1px solid #2a2a38;
-      border-radius: 16px;
-      padding: 36px 32px;
+      background: rgba(22, 22, 30, 0.65);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(124, 110, 245, 0.18);
+      border-radius: 24px;
+      padding: 40px 36px;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+      z-index: 10;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 28px;
+      gap: 10px;
+      margin-bottom: 24px;
     }
 
-    .brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #7c6ef5;
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(124, 110, 245, 0.3));
     }
 
     .brand-name {
-      font-size: 16px;
-      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
       color: #fff;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
     }
 
     h1 {
-      font-size: 22px;
-      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
       color: #fff;
-      letter-spacing: -0.4px;
-      margin-bottom: 6px;
+      letter-spacing: -0.6px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       font-size: 14px;
-      color: #5a5a78;
+      color: #94a3b8;
       margin-bottom: 28px;
     }
 
     .error-box {
-      background: #1f1218;
-      border: 1px solid #3d1a24;
-      border-radius: 10px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      border-radius: 12px;
       padding: 12px 16px;
-      font-size: 13px;
-      color: #f08090;
-      margin-bottom: 20px;
+      font-size: 13.5px;
+      color: #f87171;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     label {
       display: block;
       font-size: 13px;
       font-weight: 500;
-      color: #9898b0;
+      color: #94a3b8;
       margin-bottom: 8px;
     }
 
     input {
       width: 100%;
-      background: #1c1c24;
-      border: 1px solid #2a2a38;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 14px;
-      color: #e8e8f0;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 14.5px;
+      color: #e2e8f0;
       font-family: 'Inter', Arial, sans-serif;
       outline: none;
-      transition: border-color 0.15s;
-      margin-bottom: 18px;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
     }
 
     input::placeholder {
-      color: #3a3a50;
+      color: #475569;
     }
 
     input:focus {
       border-color: #7c6ef5;
+      box-shadow: 0 0 0 3px rgba(124, 110, 245, 0.18);
+      background: rgba(0, 0, 0, 0.35);
     }
 
     button[type="submit"] {
       width: 100%;
-      background: #7c6ef5;
+      background: linear-gradient(135deg, #7c6ef5 0%, #6366f1 100%);
       color: #fff;
       border: none;
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 14px;
-      font-weight: 500;
-      font-family: 'Inter', Arial, sans-serif;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       margin-top: 4px;
+      box-shadow: 0 4px 14px rgba(124, 110, 245, 0.25);
     }
 
     button[type="submit"]:hover {
-      background: #6a5de0;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124, 110, 245, 0.45);
+      background: linear-gradient(135deg, #8a7df6 0%, #4f46e5 100%);
     }
 
     .footer-note {
       text-align: center;
-      font-size: 13px;
-      color: #5a5a78;
-      margin-top: 20px;
+      font-size: 13.5px;
+      color: #64748b;
+      margin-top: 24px;
     }
 
     .footer-note a {
       color: #7c6ef5;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      transition: color 0.15s;
     }
 
     .footer-note a:hover {
-      color: #a89cf7;
+      color: #c7d2fe;
     }
   </style>
 </head>
@@ -151,25 +179,31 @@
   <div class="card">
 
     <div class="brand">
-      <div class="brand-dot"></div>
+      <img src="/favicon.png" alt="Snip Logo" class="brand-logo">
       <span class="brand-name">Snip</span>
     </div>
 
     <h1>Welcome back</h1>
-    <p class="subtitle">Sign in to your account to continue.</p>
+    <p class="subtitle">Sign in to your dashboard to manage links.</p>
+
+    <% if (locals.error) { %>
+    <div class="error-box">
+      <%= error %>
+    </div>
+    <% } %>
 
     <form action="/user/login" method="POST">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
 
       <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+      <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
 
       <button type="submit">Sign in</button>
     </form>
 
     <p class="footer-note">
-      Don't have an account? <a href="/user/signup">Sign up</a>
+      Don't have an account? <a href="/signup">Sign up</a>
     </p>
 
   </div>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics – Snip</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #09090b 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    /* Ambient glow */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 110, 245, 0.15) 0%, transparent 70%);
+      top: -100px;
+      left: -100px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .card {
+      background: rgba(22, 22, 30, 0.65);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(124, 110, 245, 0.18);
+      border-radius: 24px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+      z-index: 10;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(124, 110, 245, 0.3));
+    }
+
+    .brand-name {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .header-info {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #818cf8;
+      text-decoration: none;
+      word-break: break-all;
+      display: inline-block;
+      margin-bottom: 4px;
+      transition: color 0.15s;
+    }
+
+    .value:hover {
+      color: #c7d2fe;
+    }
+
+    .original {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    .stats-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-row:hover {
+      border-color: rgba(124, 110, 245, 0.25);
+    }
+
+    .stat-title {
+      font-size: 13.5px;
+      color: #94a3b8;
+    }
+
+    .stat-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124, 110, 245, 0.2), transparent);
+      margin: 20px 0;
+    }
+
+    .back-btn {
+      display: block;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 14.5px;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(124, 110, 245, 0.35);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <div class="topbar">
+      <div class="brand">
+        <img src="/favicon.png" alt="Snip Logo" class="brand-logo">
+        <span class="brand-name">Snip Analytics</span>
+      </div>
+    </div>
+
+    <div class="header-info">
+      <p class="label">Short URL</p>
+      <a href="/<%= url.shortId %>" class="value" target="_blank">
+        https://snip.beingbifrons.shop/<%= url.shortId %>
+      </a>
+      <p class="label" style="margin-top: 12px;">Original URL</p>
+      <div class="original"><%= url.redirectURL %></div>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-row">
+        <span class="stat-title">Total Clicks</span>
+        <span class="stat-val"><%= totalClicks %></span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-title">Created At</span>
+        <span class="stat-val" style="font-size: 14px; font-weight: 600; color: #a5b4fc;">
+          <%= new Date(url.createdAt).toLocaleDateString(undefined, { dateStyle: 'medium' }) %>
+        </span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <a href="/dashboard" class="back-btn">Back to dashboard</a>
+
+  </div>
+</body>
+
+</html>

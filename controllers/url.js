@@ -1,23 +1,6 @@
 import { nanoid } from "nanoid";
 import URL from "../models/url.js";
 
-export async function handleGetAllUrls(req, res) {
-    try {
-        const allURLs = await URL.find({
-            createdBy: req.user._id,
-        })
-            .sort({ createdAt: -1 })
-            .lean();
-        res.render("home", {
-            allURLs: allURLs,
-            user: req.user,
-        });
-    } catch (error) {
-        console.error("Error fetching URLs:", error);
-        return res.status(500).send("Server Error");
-    }
-}
-
 export async function handleGenerateNewShortURL(req, res) {
     try {
         const { url } = req.body;
@@ -29,7 +12,7 @@ export async function handleGenerateNewShortURL(req, res) {
             createdBy: req.user._id,
         });
         if (existing) {
-            return res.redirect(`/urls/url/${existing.shortId}`);
+            return res.redirect(`/dashboard/url/${existing.shortId}`);
         }
         const newShortId = nanoid(10);
         const newUrl = await URL.create({
@@ -37,7 +20,7 @@ export async function handleGenerateNewShortURL(req, res) {
             redirectURL: url,
             createdBy: req.user._id,
         });
-        return res.redirect(`/urls/url/${newUrl.shortId}`);
+        return res.redirect(`/dashboard/url/${newUrl.shortId}`);
     } catch (error) {
         console.error("Error creating short URL:", error);
         return res.status(500).send("Server Error");
@@ -53,25 +36,9 @@ export async function handleDeleteURL(req, res) {
             createdBy: req.user._id,
         });
 
-        return res.redirect("/urls");
+        return res.redirect("/dashboard");
     } catch (error) {
         console.error("Delete error:", error);
-        return res.status(500).send("Server Error");
-    }
-}
-
-export async function handleGetSingleURL(req, res) {
-    try {
-        const entry = await URL.findOne({
-            shortId: req.params.id,
-            createdBy: req.user._id,
-        }).lean();
-        if (!entry) {
-            return res.status(404).send("Short URL not found");
-        }
-        res.render("single-url", { url: entry });
-    } catch (error) {
-        console.error("Error fetching URL:", error);
         return res.status(500).send("Server Error");
     }
 }
